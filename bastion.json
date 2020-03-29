@@ -1,0 +1,23 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-1",
+      "source_ami": "ami-035966e8adab4aaad",
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "packer-vcc-cuarentena-bastion-{{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "tinyproxy.conf",
+      "destination": "/home/ubuntu/tinyproxy.conf"
+    },
+    {
+      "type": "shell",
+      "script": "bastion-setup.sh"
+    }
+  ]
+}
